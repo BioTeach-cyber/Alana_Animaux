@@ -1,0 +1,88 @@
+{
+  "paysages": [
+    {
+      "id": "ferme",
+      "nom": "🚜 La Ferme",
+      "image": "./assets/images/ferme.svg",
+      "animaux": [
+        {
+          "id": "vache",
+          "nom": "Vache",
+          "image": "./assets/images/animaux/vache.svg",
+          "son": "./assets/sounds/vache.mp3",
+          "x": 20,
+          "y": 50,
+          "largeur": 100
+        },
+        {
+          "id": "poule",
+          "nom": "Poule",
+          "image": "./assets/images/animaux/poule.svg",
+          "son": "./assets/sounds/poule.mp3",
+          "x": 60,
+          "y": 65,
+          "largeur": 70
+        },
+        {
+          "id": "cheval",
+          "nom": "Cheval",
+          "image": "./assets/images/animaux/cheval.svg",
+          "son": "./assets/sounds/cheval.mp3",
+          "x": 75,
+          "y": 40,
+          "largeur": 110
+        }
+      ]
+    },
+    {
+      "id": "prairie",
+      "nom": "🌾 La Prairie",
+      "image": "./assets/images/prairie.svg",
+      "animaux": [
+        {
+          "id": "papillon",
+          "nom": "Papillon",
+          "image": "./assets/images/animaux/papillon.svg",
+          "son": "./assets/sounds/papillon.mp3",
+          "x": 30,
+          "y": 35,
+          "largeur": 60
+        },
+        {
+          "id": "abeille",
+          "nom": "Abeille",
+          "image": "./assets/images/animaux/abeille.svg",
+          "son": "./assets/sounds/abeille.mp3",
+          "x": 70,
+          "y": 45,
+          "largeur": 50
+        }
+      ]
+    },
+    {
+      "id": "foret",
+      "nom": "🌲 La Forêt",
+      "image": "./assets/images/foret.svg",
+      "animaux": [
+        {
+          "id": "oiseau",
+          "nom": "Oiseau",
+          "image": "./assets/images/animaux/oiseau.svg",
+          "son": "./assets/sounds/oiseau.mp3",
+          "x": 40,
+          "y": 25,
+          "largeur": 80
+        },
+        {
+          "id": "cerf",
+          "nom": "Cerf",
+          "image": "./assets/images/animaux/cerf.svg",
+          "son": "./assets/sounds/cerf.mp3",
+          "x": 15,
+          "y": 60,
+          "largeur": 120
+        }
+      ]
+    }
+  ]
+}
