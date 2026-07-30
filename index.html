@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les Animaux de la Ferme</title>
-    
+    <title>Animaux Interactifs 🐾</title>
     <style>
         :root {
-            --vert: #7fbc48;
             --bleu: #53a4db;
-            --noir: #494949;
+            --vert: #7fbc48;
+            --violet: #a6539b;
+            --orange: #f3912b;
             --gris: #b7b7b7;
-            --fond: #ffffff;
             --rouge: #e62d32;
+            --rose: #ee7bab;
+            --rose-genially: #161213;
+            --jaune: #f4d32e;
+            --marron: #a5706c;
+            --noir: #494949;
+            --fond: #ffffff;
         }
 
         * {
@@ -24,237 +29,225 @@
         html, body {
             width: 100%;
             height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--fond);
-            color: var(--noir);
             overflow: hidden;
+            background-color: var(--fond);
         }
 
-        /* ===== PAGE D'ACCUEIL ===== */
-        #page-accueil {
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--noir);
+        }
+
+        /* ========== ÉCRAN D'ACCUEIL ========== */
+        #accueil {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             width: 100%;
             height: 100%;
             padding: 2rem;
             background: linear-gradient(135deg, var(--vert) 0%, var(--bleu) 100%);
         }
 
-        #page-accueil.cachee {
+        #accueil.cache {
             display: none;
         }
 
-        .titre-accueil {
-            font-size: clamp(1.5rem, 5vw, 3rem);
-            color: var(--fond);
-            margin-bottom: 2rem;
+        #accueil h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: white;
+            margin-bottom: 3rem;
             text-align: center;
-            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        /* ===== CARROUSEL ===== */
-        .conteneur-carrousel {
-            width: 90%;
-            max-width: 600px;
-            background: var(--fond);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .affichage-principal {
+        /* Carrousel */
+        .carrousel-conteneur {
+            position: relative;
             width: 100%;
-            aspect-ratio: 4 / 3;
-            background: var(--gris);
-            border-radius: 0.8rem;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .affichage-principal img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 0.8rem;
-        }
-
-        .info-paysage {
-            text-align: center;
-        }
-
-        .info-paysage h2 {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--noir);
-            margin-bottom: 0.5rem;
-        }
-
-        .info-paysage p {
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            color: var(--gris);
-        }
-
-        /* Contrôles du carrousel */
-        .controles-carrousel {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .btn-fleche {
-            background-color: var(--bleu);
-            color: var(--fond);
-            border: none;
-            border-radius: 0.5rem;
-            padding: 0.8rem 1.2rem;
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            cursor: pointer;
-            transition: all 0.3s;
-            flex: 0 0 auto;
-        }
-
-        .btn-fleche:hover {
-            background-color: var(--vert);
-            transform: scale(1.1);
-        }
-
-        .btn-fleche:active {
-            transform: scale(0.95);
-        }
-
-        /* Indicateur de position */
-        .indicateur-carrousel {
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            color: var(--noir);
-            min-width: 60px;
-            text-align: center;
-        }
-
-        /* Bouton "Découvrir" */
-        .btn-decouvrir {
-            background-color: var(--vert);
-            color: var(--fond);
-            border: none;
-            border-radius: 0.8rem;
-            padding: 1rem;
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-        }
-
-        .btn-decouvrir:hover {
-            background-color: var(--bleu);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(83, 164, 219, 0.3);
-        }
-
-        .btn-decouvrir:active {
-            transform: translateY(-1px);
-        }
-
-        /* ===== PAGE PAYSAGE ===== */
-        #page-paysage {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 100%;
-        }
-
-        #page-paysage.cachee {
-            display: none;
-        }
-
-        .en-tete {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem 1rem;
+            max-width: 900px;
             background-color: var(--fond);
-            border-bottom: 2px solid var(--vert);
-            gap: 1rem;
-            flex-shrink: 0;
+            border-radius: 1.5rem;
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
+            overflow: hidden;
         }
 
-        .btn-en-tete {
-            background-color: var(--bleu);
-            color: var(--fond);
+        .carrousel {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+
+        .diapo {
+            flex: 0 0 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(1rem, 5vw, 2rem);
+            text-decoration: none;
+            color: var(--noir);
+            cursor: pointer;
+        }
+
+        .diapo-image {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            margin-bottom: 1rem;
+            border-radius: 0.75rem;
+        }
+
+        .diapo-titre {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-weight: bold;
+            color: var(--bleu);
+            text-align: center;
+        }
+
+        .diapo-bouton {
+            margin-top: 1.5rem;
+            padding: 0.75rem 2rem;
+            background-color: var(--vert);
+            color: white;
             border: none;
             border-radius: 0.5rem;
-            padding: 0.6rem 1rem;
-            font-size: clamp(0.9rem, 2vw, 1rem);
+            font-size: clamp(1rem, 3vw, 1.2rem);
             cursor: pointer;
-            transition: all 0.3s;
-            white-space: nowrap;
-            flex-shrink: 0;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
         }
 
-        .btn-en-tete:hover {
+        .diapo-bouton:hover {
+            background-color: #6ab041;
+        }
+
+        /* Navigation carrousel */
+        .carrousel-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .carrousel-btn {
+            background-color: var(--bleu);
+            color: white;
+            border: none;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carrousel-btn:hover {
+            background-color: #3a8bc9;
+        }
+
+        .carrousel-indicateurs {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .indicateur {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: var(--gris);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .indicateur.actif {
+            background-color: var(--bleu);
+        }
+
+        /* ========== ÉCRAN JEU ========== */
+        #jeu {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            background-color: var(--fond);
+        }
+
+        #jeu.cache {
+            display: none;
+        }
+
+        /* Header du jeu */
+        #headerJeu {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1.5rem;
             background-color: var(--vert);
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+        }
+
+        #nomPaysage {
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            font-weight: bold;
+            color: white;
+            margin: 0;
+        }
+
+        .boutons-header {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-header {
+            padding: 0.5rem 1rem;
+            background-color: white;
+            color: var(--vert);
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            transition: all 0.3s ease;
+        }
+
+        .btn-header:hover {
+            background-color: #f0f0f0;
             transform: scale(1.05);
         }
 
-        .btn-en-tete:active {
-            transform: scale(0.95);
-        }
-
-        .titre-paysage {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            color: var(--noir);
-            flex-grow: 1;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        /* ===== ZONE PAYSAGE ===== */
-        #zone-paysage {
+        /* Conteneur du paysage */
+        #conteneurPaysage {
+            flex: 1;
             position: relative;
-            width: 100%;
-            flex-grow: 1;
             overflow: hidden;
-            background-color: #f5f5f5;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .conteneur-paysage {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-origin: center;
-            transition: transform 0.1s ease-out;
-        }
-
-        .fond-paysage {
+        #fondPaysage {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            pointer-events: none;
+            object-fit: contain;
+            background-color: #f9f9f9;
         }
 
+        /* Animaux */
         .animal {
             position: absolute;
             cursor: pointer;
-            transition: transform 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: filter 0.2s ease;
         }
 
         .animal:hover {
-            transform: scale(1.1);
             filter: brightness(1.1);
         }
 
@@ -262,299 +255,329 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            pointer-events: none;
+            display: block;
         }
 
-        /* ===== PLEIN ÉCRAN ===== */
-        #btn-plein-ecran {
-            font-size: clamp(0.9rem, 2vw, 1.2rem);
-        }
-
-        #page-paysage:fullscreen {
-            width: 100vw;
-            height: 100vh;
-        }
-
-        #page-paysage:fullscreen .en-tete {
+        .label-animal {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
+            bottom: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--orange);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
         }
 
-        #page-paysage:fullscreen #zone-paysage {
-            width: 100vw;
-            height: 100vh;
+        .animal:hover .label-animal {
+            opacity: 1;
+        }
+
+        /* ========== ZOOM ========== */
+        #conteneurPaysage.zoome {
+            cursor: zoom-out;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            #accueil {
+                padding: 1rem;
+            }
+
+            .carrousel-conteneur {
+                max-width: 100%;
+            }
+
+            #headerJeu {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .boutons-header {
+                gap: 0.5rem;
+            }
+
+            .btn-header {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
-
 <body>
-
-    <!-- PAGE D'ACCUEIL AVEC CARROUSEL -->
-    <div id="page-accueil">
-        <h1 class="titre-accueil">🐄 Les Animaux de la Ferme 🐷</h1>
+    <!-- ÉCRAN D'ACCUEIL -->
+    <section id="accueil">
+        <h1>🐾 Animaux Interactifs</h1>
         
-        <div class="conteneur-carrousel">
-            <!-- Image principale -->
-            <div class="affichage-principal">
-                <img id="image-carrousel" src="" alt="Paysage">
-            </div>
-
-            <!-- Infos du paysage -->
-            <div class="info-paysage">
-                <h2 id="nom-carrousel"></h2>
-                <p id="desc-carrousel">Clique sur les animaux pour entendre leur son !</p>
-            </div>
-
-            <!-- Contrôles -->
-            <div class="controles-carrousel">
-                <button class="btn-fleche" id="btn-precedent">◀</button>
-                <span class="indicateur-carrousel"><span id="index-actuel">1</span> / <span id="total-paysages">0</span></span>
-                <button class="btn-fleche" id="btn-suivant">▶</button>
-            </div>
-
-            <!-- Bouton Découvrir -->
-            <button class="btn-decouvrir" id="btn-decouvrir">🔍 Découvrir ce paysage</button>
+        <div class="carrousel-conteneur">
+            <div class="carrousel" id="carrouselEl"></div>
         </div>
-    </div>
 
-    <!-- PAGE PAYSAGE -->
-    <div id="page-paysage" class="cachee">
-        <header class="en-tete">
-            <button id="btn-retour" class="btn-en-tete" aria-label="Retour à l'accueil" title="Retour">
-                ← Retour
-            </button>
-            <h1 id="titre-paysage" class="titre-paysage"></h1>
-            <button id="btn-plein-ecran" class="btn-en-tete" aria-label="Plein écran" title="Plein écran">
-                ⛶
-            </button>
+        <div class="carrousel-nav">
+            <button class="carrousel-btn" id="btnPrecedent">‹</button>
+            <div class="carrousel-indicateurs" id="indicateurs"></div>
+            <button class="carrousel-btn" id="btnSuivant">›</button>
+        </div>
+    </section>
+
+    <!-- ÉCRAN JEU -->
+    <section id="jeu" class="cache">
+        <header id="headerJeu">
+            <h2 id="nomPaysage"></h2>
+            <div class="boutons-header">
+                <button class="btn-header" id="btnZoom">🔍 Zoom</button>
+                <button class="btn-header" id="btnFullscreen">⛶ Plein écran</button>
+                <button class="btn-header" id="btnRetour">← Retour</button>
+            </div>
         </header>
 
-        <div id="zone-paysage">
-            <div id="conteneur-paysage" class="conteneur-paysage"></div>
+        <div id="conteneurPaysage">
+            <img id="fondPaysage" alt="Paysage">
+            <div id="zoneAnimaux"></div>
         </div>
-    </div>
+    </section>
 
     <script>
         "use strict";
 
-        // ===== VARIABLES GLOBALES =====
-        let paysages = [];
-        let indexActuel = 0;
-        let niveauZoom = 1;
-        let decalageX = 0;
-        let decalageY = 0;
-        let touchPrecedent = null;
-        let derniereTouchX = 0;
-        let derniereTouchY = 0;
+        // ========== DONNÉES GLOBALES ==========
+        let paysagesData = [];
+        let indexCarrousel = 0;
+        let paysageActuel = null;
+        let echelle = 1;
+        let zoomActif = false;
 
-        // ===== ÉLÉMENTS DOM =====
-        const pageAccueil = document.getElementById('page-accueil');
-        const pagePaysage = document.getElementById('page-paysage');
-        const imageCarrousel = document.getElementById('image-carrousel');
-        const nomCarrousel = document.getElementById('nom-carrousel');
-        const indexActuelSpan = document.getElementById('index-actuel');
-        const totalPaysagesSpan = document.getElementById('total-paysages');
-        const btnPrecedent = document.getElementById('btn-precedent');
-        const btnSuivant = document.getElementById('btn-suivant');
-        const btnDecouvrir = document.getElementById('btn-decouvrir');
-        const btnRetour = document.getElementById('btn-retour');
-        const titrePagePaysage = document.getElementById('titre-paysage');
-        const conteneurPaysage = document.getElementById('conteneur-paysage');
-        const zonePaysage = document.getElementById('zone-paysage');
-        const btnPleinEcran = document.getElementById('btn-plein-ecran');
-
-        // ===== CHARGER LES PAYSAGES =====
-        async function chargerPaysages() {
+        // ========== CHARGEMENT DU JSON ==========
+        async function chargerJSON() {
             try {
                 const reponse = await fetch('./assets/json/paysages.json');
-                if (!reponse.ok) throw new Error(`HTTP ${reponse.status}`);
+                if (!reponse.ok) throw new Error('Erreur HTTP: ' + reponse.status);
                 
                 const data = await reponse.json();
-                paysages = data.paysages; // Accède à la clé "paysages" du JSON
+                paysagesData = Array.isArray(data.paysages) ? data.paysages : [];
                 
-                totalPaysagesSpan.textContent = paysages.length;
-                afficherAccueil();
+                if (paysagesData.length === 0) {
+                    console.error('Aucun paysage trouvé dans le JSON');
+                    return;
+                }
+
+                initialiserAccueil();
             } catch (erreur) {
-                console.error('Erreur lors du chargement :', erreur);
-                imageCarrousel.src = '';
-                nomCarrousel.textContent = 'Erreur de chargement';
+                console.error('Erreur chargement JSON:', erreur);
             }
         }
 
-        // ===== AFFICHER L'ACCUEIL =====
-        function afficherAccueil() {
-            niveauZoom = 1;
-            decalageX = 0;
-            decalageY = 0;
-            pageAccueil.classList.remove('cachee');
-            pagePaysage.classList.add('cachee');
+        // ========== ACCUEIL : CARROUSEL ==========
+        function initialiserAccueil() {
+            afficherCarrousel();
+            ajouterEvenementsCarrousel();
+        }
+
+        function afficherCarrousel() {
+            const carrouselEl = document.getElementById('carrouselEl');
+            const indicateurs = document.getElementById('indicateurs');
+            
+            carrouselEl.innerHTML = '';
+            indicateurs.innerHTML = '';
+
+            paysagesData.forEach((paysage, index) => {
+                // Diapo
+                const diapo = document.createElement('div');
+                diapo.className = 'diapo';
+                diapo.innerHTML = `
+                    <img class="diapo-image" src="${paysage.image}" alt="${paysage.nom}">
+                    <h3 class="diapo-titre">${paysage.nom}</h3>
+                    <button class="diapo-bouton">Découvrir →</button>
+                `;
+                diapo.addEventListener('click', () => lancerJeu(index));
+                carrouselEl.appendChild(diapo);
+
+                // Indicateur
+                const indicateur = document.createElement('div');
+                indicateur.className = 'indicateur' + (index === 0 ? ' actif' : '');
+                indicateur.addEventListener('click', () => allerADiapo(index));
+                indicateurs.appendChild(indicateur);
+            });
+
             mettreAJourCarrousel();
         }
 
-        // ===== METTRE À JOUR LE CARROUSEL =====
-        function mettreAJourCarrousel() {
-            const paysageActuel = paysages[indexActuel];
-            imageCarrousel.src = paysageActuel.image;
-            nomCarrousel.textContent = paysageActuel.nom;
-            indexActuelSpan.textContent = indexActuel + 1;
-        }
+        function ajouterEvenementsCarrousel() {
+            document.getElementById('btnPrecedent').addEventListener('click', () => {
+                indexCarrousel = (indexCarrousel - 1 + paysagesData.length) % paysagesData.length;
+                mettreAJourCarrousel();
+            });
 
-        // ===== NAVIGATION CARROUSEL =====
-        btnPrecedent.addEventListener('click', () => {
-            indexActuel = (indexActuel - 1 + paysages.length) % paysages.length;
-            mettreAJourCarrousel();
-        });
-
-        btnSuivant.addEventListener('click', () => {
-            indexActuel = (indexActuel + 1) % paysages.length;
-            mettreAJourCarrousel();
-        });
-
-        // ===== BOUTON DÉCOUVRIR =====
-        btnDecouvrir.addEventListener('click', afficherPaysage);
-
-        function afficherPaysage() {
-            const paysageActuel = paysages[indexActuel];
-            pageAccueil.classList.add('cachee');
-            pagePaysage.classList.remove('cachee');
-
-            titrePagePaysage.textContent = paysageActuel.nom;
-            conteneurPaysage.innerHTML = '';
-
-            // Ajouter le fond
-            const imgFond = document.createElement('img');
-            imgFond.src = paysageActuel.image;
-            imgFond.classList.add('fond-paysage');
-            conteneurPaysage.appendChild(imgFond);
-
-            // Ajouter les animaux
-            paysageActuel.animaux.forEach(animal => {
-                const divAnimal = document.createElement('div');
-                divAnimal.classList.add('animal');
-                divAnimal.style.left = animal.x + '%';
-                divAnimal.style.top = animal.y + '%';
-                divAnimal.style.width = animal.largeur + 'px';
-                divAnimal.style.height = animal.largeur + 'px';
-
-                const imgAnimal = document.createElement('img');
-                imgAnimal.src = animal.image;
-                imgAnimal.alt = animal.nom;
-                divAnimal.appendChild(imgAnimal);
-
-                // Clic pour jouer le son
-                divAnimal.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (animal.son) {
-                        const audio = new Audio(animal.son);
-                        audio.play().catch(err => console.warn('Son non disponible :', err));
-                    }
-                });
-
-                conteneurPaysage.appendChild(divAnimal);
+            document.getElementById('btnSuivant').addEventListener('click', () => {
+                indexCarrousel = (indexCarrousel + 1) % paysagesData.length;
+                mettreAJourCarrousel();
             });
         }
 
-        // ===== ZOOM À LA MOLETTE =====
-        zonePaysage.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            const facteur = e.deltaY > 0 ? 0.9 : 1.1;
-            niveauZoom *= facteur;
-            niveauZoom = Math.max(1, Math.min(niveauZoom, 5));
-            mettreAJourTransformation();
-        }, { passive: false });
-
-        // ===== DÉPLACEMENT À LA SOURIS =====
-        let sourisPrecedente = null;
-
-        zonePaysage.addEventListener('mousedown', (e) => {
-            sourisPrecedente = { x: e.clientX, y: e.clientY };
-            zonePaysage.style.cursor = 'grabbing';
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (sourisPrecedente && niveauZoom > 1) {
-                const deltaX = e.clientX - sourisPrecedente.x;
-                const deltaY = e.clientY - sourisPrecedente.y;
-
-                decalageX += deltaX;
-                decalageY += deltaY;
-
-                mettreAJourTransformation();
-                sourisPrecedente = { x: e.clientX, y: e.clientY };
-            }
-        });
-
-        document.addEventListener('mouseup', () => {
-            sourisPrecedente = null;
-            zonePaysage.style.cursor = 'grab';
-        });
-
-        // ===== TACTILE : PINCH-TO-ZOOM =====
-        zonePaysage.addEventListener('touchstart', (e) => {
-            if (e.touches.length === 2) {
-                touchPrecedent = calculerDistanceTouch(e.touches[0], e.touches[1]);
-                derniereTouchX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-                derniereTouchY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-            }
-        });
-
-        zonePaysage.addEventListener('touchmove', (e) => {
-            if (e.touches.length === 2 && touchPrecedent !== null) {
-                const distanceActuelle = calculerDistanceTouch(e.touches[0], e.touches[1]);
-                const ratio = distanceActuelle / touchPrecedent;
-
-                niveauZoom *= ratio;
-                niveauZoom = Math.max(1, Math.min(niveauZoom, 5));
-
-                mettreAJourTransformation();
-                touchPrecedent = distanceActuelle;
-            }
-        }, { passive: false });
-
-        zonePaysage.addEventListener('touchend', () => {
-            touchPrecedent = null;
-        });
-
-        // ===== UTILITAIRES =====
-        function calculerDistanceTouch(touch1, touch2) {
-            const dx = touch1.clientX - touch2.clientX;
-            const dy = touch1.clientY - touch2.clientY;
-            return Math.sqrt(dx * dx + dy * dy);
+        function allerADiapo(index) {
+            indexCarrousel = index;
+            mettreAJourCarrousel();
         }
 
-        function mettreAJourTransformation() {
-            conteneurPaysage.style.transform = `scale(${niveauZoom}) translate(${decalageX}px, ${decalageY}px)`;
+        function mettreAJourCarrousel() {
+            const carrouselEl = document.getElementById('carrouselEl');
+            carrouselEl.style.transform = `translateX(-${indexCarrousel * 100}%)`;
+
+            document.querySelectorAll('.indicateur').forEach((ind, i) => {
+                ind.classList.toggle('actif', i === indexCarrousel);
+            });
         }
 
-        // ===== BOUTON RETOUR =====
-        btnRetour.addEventListener('click', afficherAccueil);
+        // ========== JEU ==========
+        function lancerJeu(indexPaysage) {
+            paysageActuel = paysagesData[indexPaysage];
+            echelle = 1;
+            zoomActif = false;
 
-        // ===== BOUTON PLEIN ÉCRAN =====
-        btnPleinEcran.addEventListener('click', async () => {
-            try {
-                if (!document.fullscreenElement) {
-                    await pagePaysage.requestFullscreen().catch(err => {
-                        console.warn('Plein écran non disponible :', err);
-                    });
-                } else {
-                    await document.exitFullscreen();
-                }
-            } catch (err) {
-                console.error('Erreur plein écran :', err);
+            // Afficher l'écran jeu
+            document.getElementById('accueil').classList.add('cache');
+            document.getElementById('jeu').classList.remove('cache');
+
+            // Remplir le header
+            document.getElementById('nomPaysage').textContent = paysageActuel.nom;
+
+            // Afficher le fond et les animaux
+            const fondImg = document.getElementById('fondPaysage');
+            fondImg.src = paysageActuel.image;
+            fondImg.onload = () => {
+                afficherAnimaux();
+            };
+
+            // Événements des boutons
+            document.getElementById('btnZoom').addEventListener('click', basculerZoom, { once: true });
+            document.getElementById('btnFullscreen').addEventListener('click', activerPleinEcran);
+            document.getElementById('btnRetour').addEventListener('click', retournerAccueil);
+        }
+
+        function afficherAnimaux() {
+            const zoneAnimaux = document.getElementById('zoneAnimaux');
+            zoneAnimaux.innerHTML = '';
+
+            const conteneur = document.getElementById('conteneurPaysage');
+            const largeurConteneur = conteneur.offsetWidth;
+            const hauteurConteneur = conteneur.offsetHeight;
+
+            // Dimensions originales du paysage
+            const largeurOrigine = paysageActuel.largeur;
+            const hauteurOrigine = paysageActuel.hauteur;
+
+            // Calcul du ratio d'adaptation
+            const ratioX = largeurConteneur / largeurOrigine;
+            const ratioY = hauteurConteneur / hauteurOrigine;
+            const ratio = Math.min(ratioX, ratioY) * echelle;
+
+            paysageActuel.animaux.forEach((animal) => {
+                const conteneurAnimal = document.createElement('div');
+                conteneurAnimal.className = 'animal';
+
+                // Position et taille en pixels écran
+                const x = animal.x * ratio;
+                const y = animal.y * ratio;
+                const largeur = animal.largeur * ratio;
+
+                conteneurAnimal.style.left = x + 'px';
+                conteneurAnimal.style.top = y + 'px';
+                conteneurAnimal.style.width = largeur + 'px';
+                conteneurAnimal.style.height = 'auto';
+
+                const img = document.createElement('img');
+                img.src = animal.image;
+                img.alt = animal.nom;
+
+                const label = document.createElement('div');
+                label.className = 'label-animal';
+                label.textContent = animal.nom;
+
+                conteneurAnimal.appendChild(img);
+                conteneurAnimal.appendChild(label);
+
+                // Clic sur l'animal : jouer le son
+                conteneurAnimal.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    jouerSon(animal.son);
+                });
+
+                zoneAnimaux.appendChild(conteneurAnimal);
+            });
+        }
+
+        function basculerZoom() {
+            const conteneur = document.getElementById('conteneurPaysage');
+
+            if (!zoomActif) {
+                echelle = 2;
+                zoomActif = true;
+                conteneur.classList.add('zoome');
+                document.getElementById('btnZoom').textContent = '🔍 Dézoom';
+            } else {
+                echelle = 1;
+                zoomActif = false;
+                conteneur.classList.remove('zoome');
+                document.getElementById('btnZoom').textContent = '🔍 Zoom';
+            }
+
+            afficherAnimaux();
+        }
+
+        function activerPleinEcran() {
+            const elem = document.getElementById('jeu');
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch((err) => {
+                    console.error('Erreur plein écran:', err);
+                });
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            }
+        }
+
+        function jouerSon(cheminSon) {
+            const audio = new Audio(cheminSon);
+            audio.play().catch((err) => {
+                console.error('Erreur lecture son:', err);
+            });
+        }
+
+        function retournerAccueil() {
+            // Quitter le plein écran si activé
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            }
+
+            // Réinitialiser les boutons
+            document.getElementById('btnZoom').textContent = '🔍 Zoom';
+            document.getElementById('btnZoom').removeEventListener('click', basculerZoom);
+            document.getElementById('btnFullscreen').removeEventListener('click', activerPleinEcran);
+            document.getElementById('btnRetour').removeEventListener('click', retournerAccueil);
+
+            // Afficher accueil
+            document.getElementById('jeu').classList.add('cache');
+            document.getElementById('accueil').classList.remove('cache');
+
+            paysageActuel = null;
+            echelle = 1;
+            zoomActif = false;
+        }
+
+        // ========== REDIMENSIONNEMENT ==========
+        window.addEventListener('resize', () => {
+            if (paysageActuel) {
+                afficherAnimaux();
             }
         });
 
-        // Écouter quand on quitte le plein écran
-        document.addEventListener('fullscreenchange', () => {
-            // Rien à faire, juste pour éviter les erreurs
-        });
-
-        // ===== INITIALISATION =====
-        chargerPaysages();
+        // ========== LANCEMENT ==========
+        document.addEventListener('DOMContentLoaded', chargerJSON);
     </script>
-
 </body>
 </html>

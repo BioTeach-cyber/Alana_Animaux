@@ -4,6 +4,8 @@
       "id": "ferme",
       "nom": "🚜 La Ferme",
       "image": "./assets/images/ferme.svg",
+      "largeur": 1920,
+      "hauteur": 1080,
       "animaux": [
         {
           "id": "vache",
@@ -38,6 +40,8 @@
       "id": "prairie",
       "nom": "🌾 La Prairie",
       "image": "./assets/images/prairie.svg",
+      "largeur": 1920,
+      "hauteur": 1080,
       "animaux": [
         {
           "id": "papillon",
@@ -63,6 +67,8 @@
       "id": "foret",
       "nom": "🌲 La Forêt",
       "image": "./assets/images/foret.svg",
+      "largeur": 1920,
+      "hauteur": 1080,
       "animaux": [
         {
           "id": "oiseau",
