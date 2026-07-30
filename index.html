@@ -3,277 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les Sons des Animaux</title>
+    <title>Les Animaux de la Ferme</title>
+    
     <style>
-        /* ===== VARIABLES CSS ===== */
         :root {
-            --bleu: #53a4db;
             --vert: #7fbc48;
-            --violet: #a6539b;
-            --orange: #f3912b;
-            --gris: #b7b7b7;
-            --rouge: #e62d32;
-            --rose: #ee7bab;
-            --rose-genially: #161213;
-            --jaune: #f4d32e;
-            --marron: #a5706c;
+            --bleu: #53a4db;
             --noir: #494949;
+            --gris: #b7b7b7;
             --fond: #ffffff;
+            --rouge: #e62d32;
         }
 
-        /* ===== STYLES GLOBAUX ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
+        html, body {
+            width: 100%;
+            height: 100%;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--fond);
             color: var(--noir);
-            padding: 1rem;
+            overflow: hidden;
+        }
+
+        /* ===== PAGE D'ACCUEIL ===== */
+        #page-accueil {
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            gap: 1rem;
-        }
-
-        /* ===== HEADER ===== */
-        header {
-            text-align: center;
-        }
-
-        h1 {
-            color: var(--vert);
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
-            margin-bottom: 0.5rem;
-        }
-
-        /* ===== SÉLECTEUR DE PAYSAGES ===== */
-        .selecteur-paysages {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
             justify-content: center;
             align-items: center;
-            padding: 1rem;
-            background-color: #f9f9f9;
-            border-radius: 1rem;
-            border: 2px solid var(--vert);
-        }
-
-        .selecteur-paysages p {
-            font-weight: bold;
-            color: var(--vert);
-            margin: 0;
-        }
-
-        .bouton-paysage {
-            padding: 0.7rem 1.2rem;
-            border: none;
-            border-radius: 0.8rem;
-            background-color: var(--orange);
-            color: var(--fond);
-            font-weight: bold;
-            cursor: pointer;
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .bouton-paysage:hover {
-            background-color: var(--rose);
-            transform: scale(1.05);
-        }
-
-        .bouton-paysage.actif {
-            background-color: var(--vert);
-            box-shadow: 0 4px 12px rgba(127, 188, 72, 0.4);
-        }
-
-        /* ===== ZONE DU PAYSAGE ===== */
-        .conteneur-paysage {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            min-height: 0;
-        }
-
-        .titre-paysage {
-            color: var(--vert);
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            text-align: center;
-            font-weight: bold;
-        }
-
-        /* ===== ZONE DE ZOOM ===== */
-        .zone-zoom {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .bouton-zoom {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 0.6rem;
-            background-color: var(--bleu);
-            color: var(--fond);
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .bouton-zoom:hover {
-            background-color: var(--orange);
-            transform: scale(1.1);
-        }
-
-        .bouton-zoom:disabled {
-            background-color: var(--gris);
-            cursor: not-allowed;
-            transform: scale(1);
-        }
-
-        .affichage-zoom {
-            text-align: center;
-            color: var(--noir);
-            font-weight: bold;
-            min-height: 1.5rem;
-        }
-
-        /* ===== CANVAS DU PAYSAGE ===== */
-        .canvas-paysage {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-            border: 3px solid var(--vert);
-            border-radius: 1rem;
-            background-color: var(--fond);
-            touch-action: none;
-            cursor: grab;
-            min-height: 200px;
-        }
-
-        .canvas-paysage:active {
-            cursor: grabbing;
-        }
-
-        .conteneur-animaux {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            transform-origin: 0 0;
-            transition: transform 0.2s ease-out;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--vert) 0%, var(--bleu) 100%);
         }
 
+        #page-accueil.cachee {
+            display: none;
+        }
+
+        .titre-accueil {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            color: var(--fond);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .carrousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .carrousel {
+            display: flex;
+            gap: 1.5rem;
+            overflow: hidden;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+        }
+
+        .carrousel::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .carrousel::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        .carrousel::-webkit-scrollbar-thumb {
+            background: var(--fond);
+            border-radius: 10px;
+        }
+
+        .carte-paysage {
+            flex: 0 0 100%;
+            scroll-snap-align: center;
+            background: var(--fond);
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            min-height: 300px;
+        }
+
+        .carte-paysage:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .carte-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: var(--gris);
+        }
+
+        .carte-nom {
+            padding: 1.5rem;
+            text-align: center;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            font-weight: bold;
+            color: var(--vert);
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bouton-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--fond);
+            border: none;
+            width: clamp(40px, 8vw, 50px);
+            height: clamp(40px, 8vw, 50px);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--vert);
+            z-index: 10;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .bouton-nav:hover {
+            background-color: var(--vert);
+            color: var(--fond);
+        }
+
+        .bouton-nav.prev {
+            left: -60px;
+        }
+
+        .bouton-nav.next {
+            right: -60px;
+        }
+
+        /* ===== PAGE PAYSAGE ===== */
+        #page-paysage {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            background-color: var(--fond);
+        }
+
+        #page-paysage.cachee {
+            display: none;
+        }
+
+        /* En-tête compact */
+        .entete {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--bleu);
+            color: var(--fond);
+            min-height: auto;
+            flex-shrink: 0;
+        }
+
+        .entete-titre {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            font-weight: bold;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .bouton-retour {
+            background: transparent;
+            border: 2px solid var(--fond);
+            color: var(--fond);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-weight: bold;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .bouton-retour:hover {
+            background: var(--fond);
+            color: var(--bleu);
+        }
+
+        /* Zone paysage */
+        .zone-paysage {
+            flex-grow: 1;
+            position: relative;
+            overflow: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--fond);
+        }
+
+        .conteneur-paysage {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            touch-action: pinch-zoom;
+        }
+
+        /* Animaux */
         .animal {
             position: absolute;
             cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .animal img,
-        .animal svg {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            pointer-events: none;
+            transition: filter 0.2s ease;
+            image-rendering: crisp-edges;
         }
 
         .animal:hover {
-            filter: drop-shadow(0 0 8px var(--orange));
-            transform: scale(1.1);
+            filter: brightness(1.15);
         }
 
-        /* ===== LABEL ANIMAL ===== */
-        .label-animal {
-            position: absolute;
-            background-color: var(--orange);
-            color: var(--fond);
-            padding: 0.4rem 0.8rem;
-            border-radius: 0.5rem;
-            font-size: 0.85rem;
-            font-weight: bold;
-            white-space: nowrap;
-            pointer-events: none;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            bottom: 110%;
-            left: 50%;
-            transform: translateX(-50%);
+        .animal:active {
+            filter: brightness(0.85);
         }
 
-        .animal:hover .label-animal {
-            opacity: 1;
+        /* Indicateur son en lecture */
+        .animal.jouant {
+            animation: pulse-animal 0.5s ease-in-out;
         }
 
-        /* ===== MESSAGE DE CHARGEMENT ===== */
-        .message-chargement {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--vert);
-            font-weight: bold;
+        @keyframes pulse-animal {
+            0%, 100% {
+                filter: drop-shadow(0 0 0px rgba(127, 188, 72, 0.8));
+            }
+            50% {
+                filter: drop-shadow(0 0 8px rgba(127, 188, 72, 0.8));
+            }
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* Responsive tablette/petit écran */
         @media (max-width: 768px) {
-            body {
-                padding: 0.5rem;
-                gap: 0.5rem;
+            .bouton-nav.prev,
+            .bouton-nav.next {
+                position: static;
+                margin: 0 0.5rem;
             }
 
-            .selecteur-paysages {
-                padding: 0.8rem;
-                gap: 0.5rem;
+            .carrousel-container {
+                margin: 0;
+            }
+        }
+
+        /* Mode landscape vs portrait */
+        @media (orientation: landscape) {
+            .titre-accueil {
+                margin-bottom: 1rem;
             }
 
-            .bouton-paysage {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
+            .carte-paysage {
+                min-height: 250px;
             }
 
-            .zone-zoom {
-                margin-bottom: 0.3rem;
-            }
-
-            .bouton-zoom {
-                padding: 0.4rem 0.8rem;
-                font-size: 1rem;
+            .carte-thumbnail {
+                height: 150px;
             }
         }
     </style>
 </head>
+
 <body>
-    <div class="selecteur-paysages">
-        <p>Choisir un paysage :</p>
-        <div id="conteneur-boutons-paysages"></div>
+
+    <!-- PAGE D'ACCUEIL -->
+    <div id="page-accueil">
+        <h1 class="titre-accueil">🐾 Les Animaux</h1>
+        
+        <div class="carrousel-container">
+            <button class="bouton-nav prev" aria-label="Paysage précédent">❮</button>
+            
+            <div class="carrousel" id="carrousel">
+                <!-- Les cartes seront générées par JavaScript -->
+            </div>
+            
+            <button class="bouton-nav next" aria-label="Paysage suivant">❯</button>
+        </div>
     </div>
 
-    <div class="conteneur-paysage">
-        <h2 class="titre-paysage" id="titre-paysage">Chargement...</h2>
+    <!-- PAGE PAYSAGE -->
+    <div id="page-paysage" class="cachee">
+        <header class="entete">
+            <button class="bouton-retour" id="btn-retour">← Retour</button>
+            <h2 class="entete-titre" id="titre-paysage">Paysage</h2>
+            <div style="width: 80px;"></div> <!-- Espacement pour centrer le titre -->
+        </header>
 
-        <div class="zone-zoom">
-            <button class="bouton-zoom" id="btn-zoom-moins">🔍−</button>
-            <div class="affichage-zoom" id="affichage-zoom">100%</div>
-            <button class="bouton-zoom" id="btn-zoom-plus">🔍+</button>
-            <button class="bouton-zoom" id="btn-reset-zoom">↺ Réinitialiser</button>
-        </div>
-
-        <div class="canvas-paysage" id="canvas-paysage">
-            <div class="conteneur-animaux" id="conteneur-animaux"></div>
-            <div class="message-chargement" id="message-chargement">Chargement du paysage...</div>
+        <div class="zone-paysage">
+            <div class="conteneur-paysage" id="conteneur-paysage">
+                <!-- Paysage et animaux générés par JavaScript -->
+            </div>
         </div>
     </div>
 
@@ -281,227 +321,190 @@
         "use strict";
 
         // ===== VARIABLES GLOBALES =====
-        let donneePaysages = null;
+        let paysages = [];
         let paysageActuel = null;
-        let zoomActuel = 1;
-        const zoomMin = 0.5;
-        const zoomMax = 3;
-        const zoomIncrement = 0.2;
+        let niveauZoom = 1;
+        let decalageX = 0;
+        let decalageY = 0;
 
-        let positionOffset = { x: 0, y: 0 };
-        let isDragging = false;
-        let dragStart = { x: 0, y: 0 };
-
-        const canvas = document.getElementById('canvas-paysage');
-        const conteneurAnimaux = document.getElementById('conteneur-animaux');
-        const messagChargement = document.getElementById('message-chargement');
+        const pageAccueil = document.getElementById('page-accueil');
+        const pagePaysage = document.getElementById('page-paysage');
+        const carrousel = document.getElementById('carrousel');
+        const btnRetour = document.getElementById('btn-retour');
+        const conteneurPaysage = document.getElementById('conteneur-paysage');
         const titrePaysage = document.getElementById('titre-paysage');
-        const affichageZoom = document.getElementById('affichage-zoom');
-        const btnZoomMoins = document.getElementById('btn-zoom-moins');
-        const btnZoomPlus = document.getElementById('btn-zoom-plus');
-        const btnResetZoom = document.getElementById('btn-reset-zoom');
-        const conteneurBoutonsPaysages = document.getElementById('conteneur-boutons-paysages');
 
-        // ===== CHARGER LE FICHIER JSON =====
+        // ===== CHARGEMENT DU JSON =====
         async function chargerPaysages() {
             try {
                 const reponse = await fetch('./assets/json/paysages.json');
-                if (!reponse.ok) throw new Error('Impossible de charger paysages.json');
-                donneePaysages = await reponse.json();
+                if (!reponse.ok) throw new Error('Erreur de chargement');
+                const data = await reponse.json();
+                paysages = data.paysages; // Accède à la clé "paysages" du JSON
 
-                // Créer les boutons de sélection
-                creerBoutonsPaysages();
-
-                // Charger le premier paysage par défaut
-                if (donneePaysages.paysages && donneePaysages.paysages.length > 0) {
-                    afficherPaysage(donneePaysages.paysages[0].id);
-                }
+                afficherAccueil();
             } catch (erreur) {
                 console.error('Erreur lors du chargement :', erreur);
-                messagChargement.textContent = '❌ Erreur de chargement';
+                carrousel.innerHTML = '<p style="text-align: center; color: red;">Erreur : impossible de charger les paysages</p>';
             }
         }
 
-        // ===== CRÉER LES BOUTONS DE PAYSAGES =====
-        function creerBoutonsPaysages() {
-            conteneurBoutonsPaysages.innerHTML = '';
-            donneePaysages.paysages.forEach((paysage, index) => {
-                const bouton = document.createElement('button');
-                bouton.className = 'bouton-paysage';
-                bouton.textContent = paysage.nom;
-                bouton.addEventListener('click', () => afficherPaysage(paysage.id));
-                if (index === 0) bouton.classList.add('actif');
-                conteneurBoutonsPaysages.appendChild(bouton);
+        // ===== PAGE D'ACCUEIL =====
+        function afficherAccueil() {
+            pageAccueil.classList.remove('cachee');
+            pagePaysage.classList.add('cachee');
+            carrousel.innerHTML = '';
+
+            paysages.forEach((paysage, index) => {
+                const carte = document.createElement('div');
+                carte.className = 'carte-paysage';
+                carte.innerHTML = `
+                    <img src="${paysage.image}" alt="Aperçu ${paysage.nom}" class="carte-thumbnail">
+                    <div class="carte-nom">${paysage.nom}</div>
+                `;
+                carte.addEventListener('click', () => afficherPaysage(index));
+                carrousel.appendChild(carte);
+            });
+
+            // Gestion du carrousel
+            gererCarrousel();
+        }
+
+        function gererCarrousel() {
+            const btnPrev = document.querySelector('.bouton-nav.prev');
+            const btnNext = document.querySelector('.bouton-nav.next');
+
+            btnPrev.addEventListener('click', () => {
+                carrousel.scrollBy({
+                    left: -400,
+                    behavior: 'smooth'
+                });
+            });
+
+            btnNext.addEventListener('click', () => {
+                carrousel.scrollBy({
+                    left: 400,
+                    behavior: 'smooth'
+                });
             });
         }
 
-        // ===== AFFICHER UN PAYSAGE =====
-        function afficherPaysage(idPaysage) {
-            // Trouver le paysage correspondant
-            const paysage = donneePaysages.paysages.find(p => p.id === idPaysage);
-            if (!paysage) return;
+        // ===== PAGE PAYSAGE =====
+        function afficherPaysage(indexPaysage) {
+            paysageActuel = paysages[indexPaysage];
+            pageAccueil.classList.add('cachee');
+            pagePaysage.classList.remove('cachee');
 
-            paysageActuel = paysage;
-            titrePaysage.textContent = paysage.nom;
+            titrePaysage.textContent = paysageActuel.nom;
+            
+            // Réinitialiser le zoom
+            niveauZoom = 1;
+            decalageX = 0;
+            decalageY = 0;
 
-            // Réinitialiser le zoom et la position
-            zoomActuel = 1;
-            positionOffset = { x: 0, y: 0 };
-            mettreAJourAffichageZoom();
+            // Afficher le paysage
+            conteneurPaysage.style.backgroundImage = `url('${paysageActuel.image}')`;
+            conteneurPaysage.innerHTML = '';
 
-            // Mettre à jour les boutons actifs
-            document.querySelectorAll('.bouton-paysage').forEach(btn => {
-                btn.classList.remove('actif');
-            });
-            event?.target?.classList.add('actif');
-
-            // Vider et remplir le canvas
-            conteneurAnimaux.innerHTML = '';
-            messagChargement.style.display = 'none';
-
-            // Ajouter l'image de paysage comme fond
-            conteneurAnimaux.style.backgroundImage = `url('${paysage.image}')`;
-            conteneurAnimaux.style.backgroundSize = 'contain';
-            conteneurAnimaux.style.backgroundRepeat = 'no-repeat';
-            conteneurAnimaux.style.backgroundPosition = 'center';
-
-            // Créer les éléments animaux
-            paysage.animaux.forEach(animal => {
-                creerElementAnimal(animal);
+            // Ajouter les animaux
+            paysageActuel.animaux.forEach(animal => {
+                ajouterAnimal(animal);
             });
 
-            // Appliquer le zoom initial
-            appliquerTransform();
+            // Réinitialiser le zoom et le pan
+            mettreAJourTransformation();
+
+            // Gestion des événements
+            gererInteractionsZoom();
         }
 
-        // ===== CRÉER UN ÉLÉMENT ANIMAL =====
-        function creerElementAnimal(animal) {
-            const elemAnimal = document.createElement('div');
-            elemAnimal.className = 'animal';
-            elemAnimal.style.left = animal.x + '%';
-            elemAnimal.style.top = animal.y + '%';
-            elemAnimal.style.width = animal.largeur + 'px';
-            elemAnimal.style.height = animal.largeur + 'px';
-
-            // Créer l'image de l'animal
+        function ajouterAnimal(animal) {
             const img = document.createElement('img');
             img.src = animal.image;
             img.alt = animal.nom;
+            img.className = 'animal';
+            
+            // Positionnement en pourcentages
+            img.style.left = animal.x + '%';
+            img.style.top = animal.y + '%';
+            img.style.width = animal.largeur + 'px';
+            img.style.transform = 'translate(-50%, -50%)';
 
-            // Créer le label avec le nom
-            const label = document.createElement('div');
-            label.className = 'label-animal';
-            label.textContent = animal.nom;
+            // Clic pour jouer le son
+            img.addEventListener('click', (e) => {
+                e.stopPropagation();
+                jouerSon(animal, img);
+            });
 
-            elemAnimal.appendChild(img);
-            elemAnimal.appendChild(label);
-
-            // Ajouter l'écouteur de clic pour jouer le son
-            elemAnimal.addEventListener('click', () => jouerSon(animal.son, animal.nom));
-
-            conteneurAnimaux.appendChild(elemAnimal);
+            conteneurPaysage.appendChild(img);
         }
 
-        // ===== JOUER LE SON =====
-        function jouerSon(urlSon, nomAnimal) {
-            try {
-                const audio = new Audio(urlSon);
-                audio.play();
-                console.log(`Son joué : ${nomAnimal}`);
-            } catch (erreur) {
-                console.error(`Erreur lors de la lecture du son : ${erreur}`);
-            }
+        function jouerSon(animal, elementImg) {
+            const audio = new Audio(animal.son);
+            audio.play().catch(erreur => {
+                console.error('Erreur lecture son :', erreur);
+            });
+
+            // Animation visuelle
+            elementImg.classList.add('jouant');
+            setTimeout(() => elementImg.classList.remove('jouant'), 500);
         }
 
         // ===== GESTION DU ZOOM =====
-        function modifierZoom(delta) {
-            const ancienZoom = zoomActuel;
-            zoomActuel = Math.max(zoomMin, Math.min(zoomMax, zoomActuel + delta));
+        function gererInteractionsZoom() {
+            const zone = document.querySelector('.zone-paysage');
 
-            if (zoomActuel !== ancienZoom) {
-                appliquerTransform();
-                mettreAJourAffichageZoom();
-            }
+            // Molette (desktop)
+            zone.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const facteur = e.deltaY > 0 ? 0.9 : 1.1;
+                niveauZoom *= facteur;
+                niveauZoom = Math.max(1, Math.min(niveauZoom, 5)); // Entre 1 et 5
+                mettreAJourTransformation();
+            }, { passive: false });
+
+            // Touch (tactile)
+            let touchPrecedent = null;
+
+            zone.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 2) {
+                    touchPrecedent = calculerDistanceTouch(e.touches[0], e.touches[1]);
+                }
+            }, { passive: false });
+
+            zone.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 2 && touchPrecedent !== null) {
+                    e.preventDefault();
+                    const distanceActuelle = calculerDistanceTouch(e.touches[0], e.touches[1]);
+                    const facteur = distanceActuelle / touchPrecedent;
+                    niveauZoom *= facteur;
+                    niveauZoom = Math.max(1, Math.min(niveauZoom, 5));
+                    mettreAJourTransformation();
+                    touchPrecedent = distanceActuelle;
+                }
+            }, { passive: false });
+
+            zone.addEventListener('touchend', () => {
+                touchPrecedent = null;
+            });
         }
 
-        function mettreAJourAffichageZoom() {
-            affichageZoom.textContent = Math.round(zoomActuel * 100) + '%';
-            btnZoomMoins.disabled = zoomActuel <= zoomMin;
-            btnZoomPlus.disabled = zoomActuel >= zoomMax;
+        function calculerDistanceTouch(touch1, touch2) {
+            const dx = touch1.clientX - touch2.clientX;
+            const dy = touch1.clientY - touch2.clientY;
+            return Math.sqrt(dx * dx + dy * dy);
         }
 
-        function appliquerTransform() {
-            const translateX = positionOffset.x + (canvas.offsetWidth / 2) * (1 - zoomActuel);
-            const translateY = positionOffset.y + (canvas.offsetHeight / 2) * (1 - zoomActuel);
-            conteneurAnimaux.style.transform = `translate(${translateX}px, ${translateY}px) scale(${zoomActuel})`;
+        function mettreAJourTransformation() {
+            conteneurPaysage.style.transform = `scale(${niveauZoom}) translate(${decalageX}px, ${decalageY}px)`;
         }
 
-        function reinitialiserZoom() {
-            zoomActuel = 1;
-            positionOffset = { x: 0, y: 0 };
-            appliquerTransform();
-            mettreAJourAffichageZoom();
-        }
-
-        // ===== GESTION DU DRAG (DÉPLACEMENT) =====
-        canvas.addEventListener('mousedown', (e) => {
-            if (zoomActuel > 1) {
-                isDragging = true;
-                dragStart = { x: e.clientX - positionOffset.x, y: e.clientY - positionOffset.y };
-            }
-        });
-
-        canvas.addEventListener('mousemove', (e) => {
-            if (isDragging) {
-                positionOffset.x = e.clientX - dragStart.x;
-                positionOffset.y = e.clientY - dragStart.y;
-                appliquerTransform();
-            }
-        });
-
-        canvas.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-
-        canvas.addEventListener('mouseleave', () => {
-            isDragging = false;
-        });
-
-        // Zoom à la molette
-        canvas.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            const delta = e.deltaY > 0 ? -zoomIncrement : zoomIncrement;
-            modifierZoom(delta);
-        });
-
-        // Tactile : pinch zoom
-        let touchDistance = 0;
-        canvas.addEventListener('touchstart', (e) => {
-            if (e.touches.length === 2) {
-                const dx = e.touches[0].clientX - e.touches[1].clientX;
-                const dy = e.touches[0].clientY - e.touches[1].clientY;
-                touchDistance = Math.sqrt(dx * dx + dy * dy);
-            }
-        });
-
-        canvas.addEventListener('touchmove', (e) => {
-            if (e.touches.length === 2) {
-                const dx = e.touches[0].clientX - e.touches[1].clientX;
-                const dy = e.touches[0].clientY - e.touches[1].clientY;
-                const newDistance = Math.sqrt(dx * dx + dy * dy);
-                const delta = newDistance > touchDistance ? zoomIncrement : -zoomIncrement;
-                modifierZoom(delta);
-                touchDistance = newDistance;
-            }
-        });
-
-        // ===== ÉCOUTEURS DE BOUTONS =====
-        btnZoomMoins.addEventListener('click', () => modifierZoom(-zoomIncrement));
-        btnZoomPlus.addEventListener('click', () => modifierZoom(zoomIncrement));
-        btnResetZoom.addEventListener('click', reinitialiserZoom);
+        // ===== BOUTON RETOUR =====
+        btnRetour.addEventListener('click', afficherAccueil);
 
         // ===== INITIALISATION =====
         chargerPaysages();
     </script>
+
 </body>
 </html>
